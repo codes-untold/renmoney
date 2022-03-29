@@ -10,4 +10,8 @@ import 'package:flutter_test/flutter_test.dart';
 
 import 'package:renmoney/main.dart';
 
-void main() {}
+void main() {
+  test("test Asynchronous calls", () {
+    //test
+  });
+}

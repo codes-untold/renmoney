@@ -3,6 +3,7 @@ import 'package:renmoney/models/transaction_model.dart';
 import 'package:renmoney/network/api_routes.dart';
 import 'package:renmoney/network/api_service.dart';
 import 'package:renmoney/pages/transaction_detail.dart';
+import 'package:renmoney/utilities/services.dart';
 import 'package:renmoney/widgets/custom_transaction_card.dart';
 import 'package:spring/spring.dart';
 
@@ -119,11 +120,12 @@ class _TransactionListState extends State<TransactionList> {
         ApiRoutes.baseUrl,
         converter: TransactionModel.fromJson);
 
-    for (int i = 0; i < resCategories.data!.clientTransactions.length; i++) {
-      clientTransactions.add(resCategories.data!.clientTransactions[i]);
+    if (resCategories.message!.toLowerCase() == "successful") {
+      for (int i = 0; i < resCategories.data!.clientTransactions.length; i++) {
+        clientTransactions.add(resCategories.data!.clientTransactions[i]);
+      }
+    } else {
+      TransactionService().showTopToast("error fetching data");
     }
-
-    print("sfggh");
-    print(clientTransactions);
   }
 }
